@@ -2,17 +2,17 @@
 let money;
 
 money = 260;
-console.log('money: ', money);
+console.log('money: ', typeof money);
 
 let income;
 income = 'freelance';
-console.log('income: ', income);
+console.log('income: ', typeof income);
 let addExpenses;
 addExpenses = 'Food, communal apartment, fuel, entertainment';
 let deposit = true;
 let mission = 1000;
 const period = 6;
-console.log('deposit: ', deposit);
+console.log('deposit: ', typeof deposit);
 console.log('Длинна строки - addExpenses: ',addExpenses.length);
 console.log(`Период равен ${period} месяцев`);
 console.log(`Цель заработать ${mission} рублей/долларов/гривен/юани`);
