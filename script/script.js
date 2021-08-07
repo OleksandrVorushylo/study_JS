@@ -1,21 +1,26 @@
 'use strict';
-let money = 260;
-money = prompt('Ваш месячный доход?');
-console.log('money: ', typeof money);
+let money = 10000;
+money = parseInt(prompt('Ваш месячный доход?', 10000));
 
 let income;
-income = 'freelance';
-console.log('income: ', typeof income);
+income = 'Фриланс';
 let addExpenses;
 addExpenses = 'Food, communal apartment, fuel, entertainment';
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Ресторан, Кино');
 let deposit = true;
 deposit = confirm('Есть ли у вас депозит в банке?');
-console.log('deposit: ', typeof deposit);
-let mission = 10000;
+
+let showTypeOf = function(data) {
+  console.log(data, typeof(data));
+};
+showTypeOf(money);
+showTypeOf(income);
+showTypeOf(deposit);
+
+let mission = 30000;
 let period = 6;
 console.log('Длинна строки - addExpenses: ',addExpenses.length);
-console.log(`Период равен ${period} месяцев`);
+// console.log(`Период равен ${period} месяцев`);
 console.log(`Цель заработать ${mission} рублей/долларов/гривен/юани`);
 console.log(addExpenses.toLowerCase().split(/, |,/));
 
@@ -24,49 +29,60 @@ console.log('Месячный доход: ', money);
 console.log('Депозит в банке: ', deposit);
 
 let expenses1;
-expenses1 = prompt('Введите обязательную статью расходов?');
-console.log('Статья расходов: ', expenses1);
+expenses1 = prompt('Введите обязательную статью расходов?', 'Комунальные услуги');
+console.log('Обязательные расходы на: ', expenses1);
 let amount1;
 amount1 = 500;
-amount1 = prompt('Во сколько это обойдется?');
+amount1 = parseInt(prompt('Во сколько это обойдется?', 1500));
 console.log('Во сколько это обойдется: ', amount1);
 
 let expenses2;
-expenses2 = prompt('Введите обязательную статью расходов?');
-console.log('Статья расходов: ', expenses2);
+expenses2 = prompt('Введите обязательную статью расходов?', 'Еда');
+console.log('Обязательные расходы на ', expenses2);
 let amount2;
 amount2 = 500;
-amount2 = prompt('Во сколько это обойдется?');
+amount2 = parseInt(prompt('Во сколько это обойдется?', 2500));
 console.log('Во сколько это обойдется: ', amount2);
 
-let budgetMonth;
-budgetMonth = money-amount1-amount2;
-if (budgetMonth >=0) {
-  console.log('Бюджет на месяц: ', budgetMonth);
+
+let getExpensesMonth = function(a, b){
+  return a + b;
+};
+let expensesMonth = getExpensesMonth(amount1, amount2);
+console.log('Сумма всех обязательных расходов за месяц: ', expensesMonth);
+
+let getAccumulatedMonth = function(a, b, c){
+  return a - b - c;
+};
+let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2);
+if (accumulatedMonth >=0) {
+  console.log('Бюджет на месяц: ', accumulatedMonth);
 }
 
-let missionMonth;
-if (budgetMonth > 0) {
-  missionMonth = Math.ceil(mission/budgetMonth);
-  console.log(`Цель будет достигнута за ${missionMonth} месяца`);
+let getTargetMonth = function(a, b){
+  return a / b;
+};
+let targetMonth = getTargetMonth(mission, accumulatedMonth);
+if (accumulatedMonth > 0) {
+  targetMonth = Math.ceil(mission/accumulatedMonth);
+  console.log(`Цель будет достигнута за ${targetMonth} месяца`);
 } else {
  console.log(`Цель не будет достигнута.`); 
 }
 
 let budgetDay;
-budgetDay = Math.floor(budgetMonth/30);
+budgetDay = Math.floor(accumulatedMonth/30);
 console.log('Бюджет на день: ', budgetDay);
-// let budgetDay;
-// budgetDay = -100;
 
-if (budgetDay >= 1200) {
-  console.log('У вас высокий уровень дохода');
+let getStatusIncome = function(){
+  if (budgetDay >= 1200) {
+  return ('У вас высокий уровень дохода');
 } else if(budgetDay >= 600) {
-  console.log('У вас средний уровень дохода');
+  return ('У вас средний уровень дохода');
 } else if(budgetDay < 600 && budgetDay >= 0){
-  console.log('К сожалению у вас уровень дохода ниже среднего');
+  return ('К сожалению у вас уровень дохода ниже среднего');
 } else if(budgetDay <= 0){
-  console.log('Что то пошло не так');
+  return ('Что то пошло не так');
 }
-// let questionDeposit = confirm('Есть ли у вас депозит в банке?');
-// console.log('questionDeposit: ', questionDeposit);
+};
+console.log(getStatusIncome());
