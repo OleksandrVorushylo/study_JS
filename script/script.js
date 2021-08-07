@@ -46,8 +46,12 @@ if (budgetMonth >=0) {
 }
 
 let missionMonth;
-missionMonth = Math.ceil(mission/budgetMonth);
-console.log(`Цель будет достигнута за ${missionMonth} месяца`);
+if (budgetMonth > 0) {
+  missionMonth = Math.ceil(mission/budgetMonth);
+  console.log(`Цель будет достигнута за ${missionMonth} месяца`);
+} else {
+ console.log(`Цель не будет достигнута.`); 
+}
 
 let budgetDay;
 budgetDay = Math.floor(budgetMonth/30);
