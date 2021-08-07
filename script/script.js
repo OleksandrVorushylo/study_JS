@@ -17,7 +17,7 @@ let period = 6;
 console.log('Длинна строки - addExpenses: ',addExpenses.length);
 console.log(`Период равен ${period} месяцев`);
 console.log(`Цель заработать ${mission} рублей/долларов/гривен/юани`);
-console.log(addExpenses.toLowerCase().split(', '));
+console.log(addExpenses.toLowerCase().split(/, |,/));
 
 
 console.log('Месячный доход: ', money);
@@ -41,7 +41,9 @@ console.log('Во сколько это обойдется: ', amount2);
 
 let budgetMonth;
 budgetMonth = money-amount1-amount2;
-console.log('Бюджет на месяц: ', budgetMonth);
+if (budgetMonth >=0) {
+  console.log('Бюджет на месяц: ', budgetMonth);
+}
 
 let missionMonth;
 missionMonth = Math.ceil(mission/budgetMonth);
