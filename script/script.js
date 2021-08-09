@@ -1,6 +1,5 @@
 'use strict';
-let money = 10000;
-money = parseInt(prompt('Ваш месячный доход?', 10000));
+let money= +prompt('Ваш месячный доход?', 10000);
 
 let income;
 income = 'Фриланс';
@@ -38,7 +37,7 @@ console.log('Во сколько это обойдется: ', amount1);
 
 let expenses2;
 expenses2 = prompt('Введите обязательную статью расходов?', 'Еда');
-console.log('Обязательные расходы на ', expenses2);
+console.log('Обязательные расходы на: ', expenses2);
 let amount2;
 amount2 = 500;
 amount2 = parseInt(prompt('Во сколько это обойдется?', 2500));
@@ -55,13 +54,11 @@ let getAccumulatedMonth = function(a, b, c){
   return a - b - c;
 };
 let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2);
-if (accumulatedMonth >=0) {
+if (accumulatedMonth >= 0) {
   console.log('Бюджет на месяц: ', accumulatedMonth);
 }
 
-let getTargetMonth = function(a, b){
-  return a / b;
-};
+let getTargetMonth = (a, b) => a / b;
 let targetMonth = getTargetMonth(mission, accumulatedMonth);
 if (accumulatedMonth > 0) {
   targetMonth = Math.ceil(mission/accumulatedMonth);
