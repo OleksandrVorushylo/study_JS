@@ -16,10 +16,9 @@ let deposit = true;
 deposit = confirm('Есть ли у вас депозит в банке?');
 
 let start = function () {
-  money = prompt('Ваш месячный доход?');
-  while (!isNumber(money)) {
-    money = prompt('Ваш месячный доход?', 10000);
-  }
+  do {
+    money = prompt('Ваш месячный доход?');
+  } while (!isNumber(money));
 
 };
 start();
