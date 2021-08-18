@@ -10,47 +10,54 @@ let money,
 
     };
 start();
-
 let appData = {
   income: {}, // Дополнительный доход;
   addIncome: [], // Перечисление доп.доходов;
-  expenses1: {}, // Доп.расходы;
-  expenses2: {}, // Доп.расходы;
+  expenses: {}, // Доп.расходы;
   addExpenses: [], // Перечисление возможных расходов;
   deposit: false, // Наличие депозита;
-  misson: 30000, // Поставленная цель;
+  misson: 300000, // Поставленная цель;
   period: 6, // За какой период необходимо придти к цели;
   budget: money,
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0,
-
+  sum: 0,
   asking: function () {
+    let expenses, amount;
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Ресторан, Кино');
-        appData.addExpenses = addExpenses.toLowerCase().split(/, |,/);
-        appData.deposit = confirm('Есть ли у вас депозит в банке?');
+    if (addExpenses === null) {
+      return appData.asking();
+    } else { 
+      appData.addExpenses = addExpenses.toLowerCase().split(/, |,/);
+      appData.deposit = confirm('Есть ли у вас депозит в банке?');
+      }
+        for (let i = 0; i < 2; i++) {         
+        expenses = prompt('Введите обязательную статью расходов?', 'Комунальные услуги');
+        function askAmount() { 
+          amount = prompt('Во сколько это обойдется?');
+          if (!isNumber(amount)) {
+            return askAmount();
+          } else {
+            return +amount;
+          }
+        }          
+        
+        appData.expenses['"'+ expenses +'"'] = askAmount();
+      }
   }, 
 
   getExpensesMonth: function () {
     let sum = 0;
-    for (let i = 0; i < 2; i++) {
-
-      if (i === 0) {
-
-        appData.expenses1 = prompt('Введите обязательную статью расходов?', 'Комунальные услуги');
-      } else if (i === 1) {
-        appData.expenses2 = prompt('Введите обязательную статью расходов?', 'Еда');
-      }
-      sum += +prompt('Во сколько это обойдется?', 1500);
-    }
-    console.log('Обязательные расходы на: ', appData.expenses1);
-    console.log('Обязательные расходы на: ', appData.expenses2);
-    return appData.expensesMonth === sum;
+    for (let key in appData.expenses ) {
+    sum += appData.expenses[key];    
+    }     
+    return sum;
   },
 
   // expensesAmount = appData.getExpensesMonth(),
   getBudget: function(){
-    appData.budgetMonth = appData.budget - appData.expensesMonth;
+    appData.budgetMonth = appData.budget - appData.getExpensesMonth();
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
   // accumulatedMonth = getAccumulatedMonth(),
@@ -77,10 +84,7 @@ let appData = {
 
 };
 appData.asking();
-appData.getExpensesMonth();
 appData.getBudget();
-appData.getTargetMonth();
-appData.getStatusIncome();
 console.log(`Сумма обязательных расходов ${appData.getExpensesMonth()}`);
 // while (!isNaN(money) || money.trim() === '' || money === null)
 
