@@ -18,11 +18,10 @@ let appData = {
   deposit: false, // Наличие депозита;
   mission: 300000, // Поставленная цель;
   period: 6, // За какой период необходимо придти к цели;
-  budget: money,
+  budget: +money,
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0,
-  sum: 0,
   asking: function () {
     let expenses, amount;
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Ресторан, Кино');
@@ -33,7 +32,7 @@ let appData = {
       appData.deposit = confirm('Есть ли у вас депозит в банке?');
       }
         for (let i = 0; i < 2; i++) {         
-        expenses = prompt('Введите обязательную статью расходов?', 'Комунальные услуги');
+        expenses = prompt('Введите обязательную статью расходов?');
         function askAmount() { 
           amount = prompt('Во сколько это обойдется?');
           if (!isNumber(amount)) {
@@ -85,7 +84,7 @@ let appData = {
 };
 appData.asking();
 appData.getBudget();
-console.log(`Сумма обязательных расходов ${appData.getExpensesMonth()}`);
+console.log(`Сумма обязательных расходов: ${appData.getExpensesMonth()}`);
 // while (!isNaN(money) || money.trim() === '' || money === null)
 
 
@@ -96,12 +95,15 @@ console.log(`Сумма обязательных расходов ${appData.getE
 
 // console.log('Месячный доход: ', parseInt(money));
 
-let targetMonth = appData.getTargetMonth();
-console.log('targetMonth: ', targetMonth);
+let targetMonth = Math.round(appData.getTargetMonth());
 if (appData.budgetDay > 0) {
   console.log(`Цель будет достигнута за ${targetMonth} месяца`);
 } else {
  console.log(`Цель не будет достигнута.`); 
 }
-
+console.log(appData.getStatusIncome());
 // console.log('Бюджет на день: ', budgetDay);
+console.log('Наша программа включает в себя данные: ');
+for (let key in appData) {
+  console.log(key , appData[key] );
+}
