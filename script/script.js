@@ -1,4 +1,32 @@
 'use strict';
+
+const buttonCalculate = document.getElementById('start');
+const buttonAddIncome = document.getElementsByTagName('button')[0];
+const buttonAddExpenses = document.getElementsByTagName('button')[1];
+const buttonAddDeposit = document.querySelector('#deposit-check');
+const inputAdditionalIncome = document.querySelectorAll('.additional_income-item');
+const budgetMonthValue = document.getElementsByTagName('budget_month-value');
+const budgetDayValue = document.getElementsByTagName('budget_day-value');
+const expensesMonthValue = document.getElementsByTagName('expenses_month-value');
+const additionalIncomeValue = document.getElementsByTagName('additional_income-value');
+const additionalExpensesValue = document.getElementsByTagName('additional_expenses-value');
+const incomePeriodValue = document.getElementsByTagName('income_period-value');
+const targetMonthValue = document.getElementsByTagName('target_month-value');
+const inputSalaryAmount = document.querySelector('.salary-amount');
+const inputIncomeTitle = document.querySelector('.income-title');
+const inputIncomeAmount = document.querySelector('.income-amount');
+const inputExpensesTitle = document.querySelector('.expenses-title');
+const inputExpensesAmount = document.querySelector('.expenses-amount');
+const inputAdditionalExpenses = document.querySelector('.additional_expenses-item');
+const inputTargetAmount = document.querySelector('.target-amount');
+const inputPeriodSelect = document.querySelector('.period-select');
+
+
+
+
+
+
+
 let isNumber = function(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
