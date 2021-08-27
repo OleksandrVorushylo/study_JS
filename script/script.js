@@ -15,7 +15,7 @@ const incomePeriodValue = document.querySelector('.income_period-value');
 const targetMonthValue = document.querySelector('.target_month-value');
 let inputSalaryAmount = document.querySelector('.salary-amount');
 const inputIncomeTitle = document.querySelector('.income-title');
-// const inputIncomeAmount = document.querySelector('.income-amount');
+const inputIncomeAmount = document.querySelector('.income-amount');
 const inputExpensesTitle = document.querySelector('.expenses-title');
 const inputExpensesAmount = document.querySelector('.expenses-amount');
 let expensesItems = document.querySelectorAll('.expenses-items');
@@ -24,10 +24,6 @@ const inputTargetAmount = document.querySelector('.target-amount');
 let periodSelect = document.querySelector('.period-select');
 let periodAmount = document.querySelector('.period-amount');
 let incomeItems = document.querySelectorAll('.income-items');
-
-
-
-
 
 
 
@@ -49,6 +45,19 @@ let appData = {
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0,
+  checkInput: function() {   
+    let allInput = document.querySelectorAll('input');
+    allInput.forEach((item)=>{
+      item.addEventListener('input', () => {
+        if (item.getAttribute('placeholder') === 'Наименование') {
+            item.value = item.value.replace(/[^а-я \s !?,. ]/,'');
+        }
+        if (item.getAttribute('placeholder') === 'Сумма') {
+            item.value = item.value.replace(/[^1-9]/,'');
+        }
+      });  
+    });
+  },
   start: function () {
       // do {
       //   money = prompt('Ваш месячный доход?', 10000);
@@ -76,6 +85,9 @@ let appData = {
   addIncomeBlock: function () {
     let cloneIncomeItems = incomeItems[0].cloneNode(true);
     incomeItems[0].parentNode.insertBefore(cloneIncomeItems, buttonAddIncome);
+    cloneIncomeItems.querySelectorAll('input').forEach((input)=> {
+      input.value = '';  
+       });
     incomeItems = document.querySelectorAll('.income-items');
 
     if(incomeItems.length === 3){
@@ -86,6 +98,10 @@ let appData = {
   addExpensesBlock: function () {
     let cloneExpensesItems = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItems, buttonAddExpenses);
+
+    cloneExpensesItems.querySelectorAll('input').forEach((input)=> {
+      input.value = '';  
+       });
     expensesItems = document.querySelectorAll('.expenses-items');
 
     if(expensesItems.length === 3){
@@ -220,6 +236,7 @@ inputSalaryAmount.addEventListener('input', () => {
     buttonCalculate.disabled = true;
   }
 });
+appData.checkInput();
 buttonCalculate.addEventListener('click', appData.start);
 buttonAddExpenses.addEventListener('click', appData.addExpensesBlock);
 buttonAddIncome.addEventListener('click', appData.addIncomeBlock);
