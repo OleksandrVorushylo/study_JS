@@ -50,10 +50,10 @@ let appData = {
     allInput.forEach((item)=>{
       item.addEventListener('input', () => {
         if (item.getAttribute('placeholder') === 'Наименование') {
-            item.value = item.value.replace(/[^а-я \s !?,. ]/,'');
+            item.value = item.value.replace(/[^а-я ^А-Я \s !?,. ]/,'');
         }
         if (item.getAttribute('placeholder') === 'Сумма') {
-            item.value = item.value.replace(/[^1-9]/,'');
+            item.value = item.value.replace(/[^0-9]/,'');
         }
       });  
     });
@@ -225,6 +225,9 @@ let appData = {
     additionalIncomeValue.value = appData.addIncome.join(', ');
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
     incomePeriodValue.value = appData.calcPeriod();
+    periodSelect.addEventListener('input', ()=> {      
+      incomePeriodValue.value = appData.calcPeriod();
+    });
   },
 
 };
