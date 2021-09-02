@@ -108,10 +108,21 @@ let appData = {
               elem.value = '';
 
             });
+
+    incomeItems.forEach((item, index) => {
+      if (index !== 0) item.remove();
+      });
+      expensesItems.forEach((item, index) => {
+      if (index !== 0) item.remove();
+      });
+
+
     buttonCalculate.style.display = 'block';
     resetCalculate.style.display = 'none';
     buttonAddIncome.removeAttribute('disabled', 'disabled');
     buttonAddDeposit.removeAttribute('disabled', 'disabled');
+    depositCheck.checked=false;
+
 
     const allInput = document.querySelectorAll('.data input[type=text]');
             allInput.forEach(function(item){
